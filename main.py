@@ -25,10 +25,11 @@ def main():
     cve_data = get_cve_details(cve_id)
 
     if cve_data:
-        cve_id, description, cvss_score, attack_techniques = extract_cve_info(cve_data)
+        cve_id, description, cvss_score, severity, attack_techniques = extract_cve_info(cve_data)
         display_results(cve_id, description, cvss_score, attack_techniques)
     else:
         print("Error: CVE not found or API issue.")
 
 if __name__ == "__main__":
     main()
+    

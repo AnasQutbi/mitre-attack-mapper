@@ -1,8 +1,27 @@
 def extract_cve_info(cve_data):
-    """Extract necessary information from the CVE JSON response."""
-    cve_id = cve_data['cve']['CVE_data_meta']['ID']
-    description = cve_data['cve']['description']['description_data'][0]['value']
-    
+    """Extracts key details from CVE API response."""
+    try:
+        # Navigate the response structure correctly
+        cve_id = cve_data.get('id', 'N/A')
+        description = cve_data.get('descriptions', [{'value': 'No description available'}])[0]['value']
+        
+        # Extract CVSS score and severity
+        cvss_score = "N/A"
+        severity = "N/A"
+        if 'metrics' in cve_data and 'cvssMetricV31' in cve_data['metrics']:
+            cvss_info = cve_data['metrics']['cvssMetricV31'][0]['cvssData']
+            cvss_score = cvss_info.get('baseScore', 'N/A')
+            severity = cvss_info.get('baseSeverity', 'N/A')
+
+        # Extract references
+        references = [ref['url'] for ref in cve_data.get('references', [])]
+
+        return cve_id, description, cvss_score, severity, references
+
+    except KeyError as e:
+        print(f"⚠️ KeyError: Missing key in response - {e}")
+        return None, None, None, None, None
+
     # Extract CVSS Score
     cvss_score = "N/A"
     if 'impact' in cve_data and 'baseMetricV3' in cve_data['impact']:
