@@ -10,5 +10,5 @@ This CLI tool allows users to input a CVE ID and retrieve:
 
 ### Step 1: Clone the Repository
 ```bash
-git clone https://github.com/yourrepo/mitre-attack-mapper.git
+git clone https://github.com/AnasQutbi/mitre-attack-mapper.git
 cd mitre-attack-mapper
