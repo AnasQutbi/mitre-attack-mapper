@@ -25,3 +25,11 @@ It fetches:
 ```bash
 git clone https://github.com/AnasQutbi/mitre-attack-mapper.git
 cd mitre-attack-mapper
+
+### Step 2: Install Dependencies
+```bash
+pip install -r requirements.txt
+
+### Step 3: Run The Tool
+```bash
+python main.py
